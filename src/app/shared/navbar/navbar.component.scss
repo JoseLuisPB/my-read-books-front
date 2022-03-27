@@ -1,0 +1,44 @@
+@import '../colors.scss';
+$font-size: 1.25rem;
+
+nav{
+  background-color: $navbar;
+  a {
+    color: $text;
+    text-decoration: none;
+    font-size: $font-size;
+  }
+
+  ul{
+    background-color: $navbar;
+  }
+
+  li{
+    margin-right: 2rem;
+  }
+}
+
+span{
+  margin-left: 5px;
+}
+
+.link-content-format{
+  display: flex;
+  align-items: center;
+}
+
+.toggle-format{
+  background-color: transparent;
+  border: transparent;
+  color: white;
+  display: flex;
+  align-items:center;
+  font-size: 1.25rem;
+}
+
+@media screen and (min-width: 990px){
+  #toggle-button {
+    display: none;
+  }
+}
+
