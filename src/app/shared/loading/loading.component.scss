@@ -1,0 +1,25 @@
+@import '../colors.scss';
+span{
+  font-size: 2.5rem;
+}
+
+.spinner{
+  border: 5px solid $header;
+  border-top: 5px solid $navbar;
+  border-bottom: 5px solid $navbar;
+  border-radius: 50%;
+  height: 2rem;
+  width: 2rem;
+  animation: spin 2s linear infinite;
+}
+
+.spinner-in-text {
+  @extend .spinner;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+@keyframes spin {
+  0% {transform: rotate(0deg)};
+  100% {transform: rotate(360deg)}
+}
