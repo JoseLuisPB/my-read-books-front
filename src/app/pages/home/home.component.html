@@ -1,1 +1,31 @@
-<p>home works!</p>
+<div class="pb-3">
+  <section>
+    <h1 class="d-flex justify-content-center">Welcome to my read books app</h1>
+    <div>
+      <p>Texto introductorio</p>
+      <p>The list below display the last books I have read until now</p>
+    </div>
+  </section>
+  <hr>
+  <section>
+    <div>
+      <h2>Opciones para la paginación y la búsqueda</h2>
+    </div>
+    <div>
+      <table>
+        <thead class="table-header">
+          <th *ngFor="let head of header; let i = index;">
+            {{ head | uppercase }}
+          </th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let book of data; let i = index" [ngClass]="i % 2 === 0 ? 'row-odd' : 'row-even'">
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.year }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
