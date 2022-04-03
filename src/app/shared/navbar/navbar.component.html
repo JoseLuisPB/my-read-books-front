@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
       <div id="toggle-button" class="toggle-format" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <mat-icon>menu</mat-icon>
+        <fa-icon [icon]="faBars"></fa-icon>
         <a class="nav-link link-content-format justify-content-end title" [routerLink]="['home']">
           <span>My read Books</span>
         </a>
@@ -10,45 +10,45 @@
         <ul class="navbar-nav">
           <li class="nav-item" routerLink="active">
             <a class="nav-link link-content-format" aria-current="page" [routerLink]="['home']">
-                <mat-icon>home</mat-icon>
+                <fa-icon [icon]="faHome"></fa-icon>
                 <span>Home</span>
             </a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle link-content-format" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <mat-icon>settings</mat-icon>
+              <fa-icon [icon]="faCog"></fa-icon>
               <span>Manage</span>
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="color:black">
               <li>
                 <a class="dropdown-item link-content-format" href="#">
-                  <mat-icon>book</mat-icon>
+                  <fa-icon [icon]="faBook"></fa-icon>
                   <span>Books</span>
                 </a>
               </li>
               <li>
                 <a class="dropdown-item link-content-format" href="#">
-                  <mat-icon>people</mat-icon>
+                  <fa-icon [icon]="faUsers"></fa-icon>
                   <span>Authors</span>
                 </a>
               </li>
               <li>
                 <a class="dropdown-item link-content-format" href="#">
-                  <mat-icon>flag</mat-icon>
-                  <span>Nationalities</span>
+                  <fa-icon [icon]="faGlobe"></fa-icon>
+                  <span>Countries</span>
                 </a>
               </li>
             </ul>
           </li>
           <li class="nav-item">
             <a class="nav-link link-content-format" href="#">
-              <mat-icon>bar_chart</mat-icon>
+              <fa-icon [icon]="faChartLine"></fa-icon>
               <span>statistics</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link link-content-format" [routerLink]="['loading']">
-              <mat-icon>person</mat-icon>
+              <fa-icon [icon]="faUser"></fa-icon>
               <span>Author</span>
             </a>
           </li>
@@ -56,8 +56,8 @@
       </div>
       <div id="title" class="col-3">
         <a class="nav-link link-content-format justify-content-end title" [routerLink]="['home']">
-          <span>My read Books</span>
-          <mat-icon>book</mat-icon>
+          <span class="me-2">My read Books</span>
+          <fa-icon [icon]="faBookReader"></fa-icon>
         </a>
       </div>
   </div>
