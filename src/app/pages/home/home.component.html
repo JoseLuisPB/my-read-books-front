@@ -3,19 +3,39 @@
     <h1 class="d-flex justify-content-center">Welcome to my read books app</h1>
     <div>
       <p>Texto introductorio</p>
-      <p>The list below display the last books I have read until now</p>
+      <p>The list below display the last books I have read until {{ getTodayDate() | date: 'mediumDate': 'locale'}}</p>
     </div>
   </section>
   <hr>
   <section>
+    <!-- <div class="row">
+      <div class="col-4"></div>
+      <div class="d-flex col-4">
+        <label for="items">Display</label>
+        <select id="items">
+          <option>5</option>
+          <option>10</option>
+          <option>15</option>
+          <option>All</option>
+        </select>
+      </div>
+      <div class="col-3">
+        <div>
+          <div>
+            <div><mat-icon>search</mat-icon></div>
+          </div>
+          <input type="text" id="search" placeholder="Search">
+        </div>
+      </div>
+    </div> -->
     <div>
-      <h2>Opciones para la paginación y la búsqueda</h2>
-    </div>
-    <div>
-      <table>
+      <table class="w-100">
         <thead class="table-header">
-          <th *ngFor="let head of header; let i = index;">
-            {{ head | uppercase }}
+          <th *ngFor="let head of header; let i = index">
+            <div  class="d-flex">
+              <app-sort-column [columnName]="head" [data]="data"></app-sort-column>
+              <span class="ms-2">{{ head }}</span>
+            </div>
           </th>
         </thead>
         <tbody>

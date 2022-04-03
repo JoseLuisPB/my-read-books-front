@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HEADER, DATA} from '../../test-data'
+import { IBook } from 'src/app/interfaces/book.interface';
 
 @Component({
   selector: 'app-home',
@@ -9,11 +10,14 @@ import {HEADER, DATA} from '../../test-data'
 export class HomeComponent implements OnInit {
 
   header: string[] = HEADER;
-  data: any[] = DATA;
+  data: IBook[] = DATA;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  getTodayDate(): Date {
+    const today = new Date();
+    return today;
   }
-
 }
