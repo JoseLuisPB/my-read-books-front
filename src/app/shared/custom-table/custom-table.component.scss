@@ -1,0 +1,47 @@
+@import '../colors.scss';
+
+.table-header{
+  background-color: #8BA6AD;
+  border-bottom: black solid 2px;
+  line-height: 3rem;
+    th, td {
+      padding-left: 10px;
+    }
+}
+
+.row-odd{
+  @extend .table-header;
+  background-color: #575F61;
+}
+
+.row-even{
+  @extend .table-header;
+  background-color: #5D6E68;
+}
+
+.icon-format {
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  border-radius: 50%;
+  margin-top: 0.25rem;
+}
+
+.edit-action {
+  @extend .icon-format;
+  background-color: $edit;
+}
+
+.delete-action {
+  @extend .icon-format;
+  background-color: $delete;
+}
+
+@media screen and (max-width: 576px){
+  #actions {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+

@@ -1,0 +1,30 @@
+<table [style.width.%]="width">
+  <thead class="table-header">
+    <th *ngFor="let headData of headerData; let i = index">
+      <div class="d-flex">
+        <app-sort-column [columnName]="headData" [data]="tableData"></app-sort-column>
+        <span class="ms-2">{{ headData }}</span>
+      </div>
+    </th>
+    <th *ngIf="displayActionColumn">
+      Actions
+    </th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let rowData of tableData; let i = index" [ngClass]="i % 2 === 0 ? 'row-odd' : 'row-even'">
+      <td *ngFor="let header of headerData">
+        {{ rowData[header] }}
+      </td>
+      <td *ngIf="displayActionColumn">
+        <div id="actions" class="d-flex gap-4">
+          <div class="edit-action">
+            <fa-icon  role="button" [icon]="faEdit" (click)="edit(rowData)" title="edit"></fa-icon>
+          </div>
+          <div class="delete-action">
+            <fa-icon  role="button" [icon]="faTrash" (click)="delete(rowData)" title="delete"></fa-icon>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

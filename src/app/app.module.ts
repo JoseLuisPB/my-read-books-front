@@ -10,6 +10,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { LoadingComponent } from './shared/loading/loading.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SortColumnComponent } from './shared/sort-column/sort-column.component';
+import { CustomTableComponent } from './shared/custom-table/custom-table.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { SortColumnComponent } from './shared/sort-column/sort-column.component'
     HomeComponent,
     NavbarComponent,
     LoadingComponent,
-    SortColumnComponent
+    SortColumnComponent,
+    CustomTableComponent,
   ],
   imports: [
     BrowserModule,
