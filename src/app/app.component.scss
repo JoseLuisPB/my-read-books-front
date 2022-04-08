@@ -1,0 +1,9 @@
+.margin-format{
+  margin: 0 5%;
+}
+
+@media screen and (max-width: 576px){
+  main {
+    margin: 0 1%;
+  }
+}
