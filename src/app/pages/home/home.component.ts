@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {HEADER, DATA} from '../../test-data'
-import { IBook } from 'src/app/interfaces/book.interface';
+import { BooksService } from 'src/app/services/books.service';
+import { Book } from 'src/app/models/book.model';
 
 @Component({
   selector: 'app-home',
@@ -9,15 +9,19 @@ import { IBook } from 'src/app/interfaces/book.interface';
 })
 export class HomeComponent implements OnInit {
 
-  header: string[] = HEADER;
-  data: IBook[] = DATA;
+  headerData: string[] = ['author', 'title', 'year'];
+  tableData: Book[] = [];
+  isLoading = true;
 
-  constructor() {}
+  constructor(
+    private booksService: BooksService
+  ) {}
 
-  ngOnInit(): void {}
-
-  getTodayDate(): Date {
-    const today = new Date();
-    return today;
+  ngOnInit(): void {
+    this.booksService.loadLastNBooks(10).subscribe( resp => {
+      this.tableData = resp;
+      this.isLoading = false;
+    });
   }
+
 }

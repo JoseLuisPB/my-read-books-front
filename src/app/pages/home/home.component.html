@@ -2,50 +2,15 @@
   <section>
     <h1 class="d-flex justify-content-center">Welcome to my read books app</h1>
     <div>
-      <p>Texto introductorio</p>
-      <p>The list below display the last books I have read until {{ getTodayDate() | date: 'mediumDate': 'locale'}}</p>
+      <p>I have created this application to keep track of the books I have read each year.</p>
+      <p>The list below display the last 10 books I have read</p>
     </div>
   </section>
   <hr>
-  <section>
-    <!-- <div class="row">
-      <div class="col-4"></div>
-      <div class="d-flex col-4">
-        <label for="items">Display</label>
-        <select id="items">
-          <option>5</option>
-          <option>10</option>
-          <option>15</option>
-          <option>All</option>
-        </select>
-      </div>
-      <div class="col-3">
-        <div>
-          <div>
-            <div><mat-icon>search</mat-icon></div>
-          </div>
-          <input type="text" id="search" placeholder="Search">
-        </div>
-      </div>
-    </div> -->
-    <div>
-      <table class="w-100">
-        <thead class="table-header">
-          <th *ngFor="let head of header; let i = index">
-            <div  class="d-flex">
-              <app-sort-column [columnName]="head" [data]="data"></app-sort-column>
-              <span class="ms-2">{{ head }}</span>
-            </div>
-          </th>
-        </thead>
-        <tbody>
-          <tr *ngFor="let book of data; let i = index" [ngClass]="i % 2 === 0 ? 'row-odd' : 'row-even'">
-            <td>{{ book.title }}</td>
-            <td>{{ book.author }}</td>
-            <td>{{ book.year }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <section *ngIf="!isLoading; else loading">
+      <app-custom-table [width]="100" [headerData]="headerData" [tableData]="tableData" [displayActionColumn]="false"></app-custom-table>
   </section>
+  <ng-template #loading>
+    <app-loading class="d-flex justify-content-center" [spinner]="false"></app-loading>
+  </ng-template>
 </div>
