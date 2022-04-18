@@ -1,0 +1,24 @@
+@import '../colors.scss';
+
+.button-format{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: transparent;
+  color: white;
+}
+
+.edit{
+  @extend .button-format;
+  background-color: $edit;
+}
+
+.delete{
+  @extend .button-format;
+  background-color: $delete;
+}
+
+.new{
+  @extend .button-format;
+  background-color: $new;
+}

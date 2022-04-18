@@ -11,6 +11,9 @@ import { LoadingComponent } from './shared/loading/loading.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SortColumnComponent } from './shared/sort-column/sort-column.component';
 import { CustomTableComponent } from './shared/custom-table/custom-table.component';
+import { BooksComponent } from './pages/books/books.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CustomButtonComponent } from './shared/custom-button/custom-button.component';
 
 @NgModule({
   declarations: [
@@ -20,13 +23,16 @@ import { CustomTableComponent } from './shared/custom-table/custom-table.compone
     LoadingComponent,
     SortColumnComponent,
     CustomTableComponent,
+    BooksComponent,
+    CustomButtonComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatIconModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -19,24 +19,6 @@
   background-color: #5D6E68;
 }
 
-.icon-format {
-  width: 50px;
-  display: flex;
-  justify-content: center;
-  border-radius: 50%;
-  margin-top: 0.25rem;
-}
-
-.edit-action {
-  @extend .icon-format;
-  background-color: $edit;
-}
-
-.delete-action {
-  @extend .icon-format;
-  background-color: $delete;
-}
-
 @media screen and (max-width: 576px){
   #actions {
     display: flex;
