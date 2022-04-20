@@ -40,6 +40,10 @@ span{
   font-size: 1.25rem;
 }
 
+.active{
+  color: $active !important;
+}
+
 @media screen and (min-width: 990px){
   #toggle-button {
     display: none;
