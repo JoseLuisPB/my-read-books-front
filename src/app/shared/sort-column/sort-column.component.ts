@@ -25,8 +25,8 @@ export class SortColumnComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscriptions.push(
-      this.messageService.columnSorted.subscribe( resp => {
-        this.resetColumnSortIcon(resp);
+      this.messageService.columnSorted.subscribe( columnSorted => {
+        if ( this.columnName !== columnSorted ) this.selectedSort = this.faSort;
       }, error => {
         console.error(error);
       })
@@ -35,10 +35,6 @@ export class SortColumnComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.forEach( subscription => subscription.unsubscribe());
-  }
-
-  resetColumnSortIcon(columnSorted: string): void {
-    if ( this.columnName !== columnSorted) this.selectedSort = this.faSort;
   }
 
   sortData(): void {

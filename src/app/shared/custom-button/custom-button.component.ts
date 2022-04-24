@@ -11,6 +11,7 @@ export class CustomButtonComponent implements OnInit {
   @Input() icon!: IconDefinition;
   @Input() class!: 'edit' | 'delete' | 'new';
   @Input() title = '';
+  @Input() disableButton = false;
 
   constructor() { }
 

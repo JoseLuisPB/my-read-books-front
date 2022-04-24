@@ -22,3 +22,7 @@
   @extend .button-format;
   background-color: $new;
 }
+
+button:disabled{
+  background-color: $disabled;
+}

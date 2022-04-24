@@ -1,5 +1,5 @@
 import { faHome, faCog, faBook,  faUsers, faGlobe, faChartLine, faUser, faBookReader,  faBars, faSort, faSortUp, faSortDown,
-  faEdit, faTrash, faPlus
+  faEdit, faTrash, faPlus, faSave
 
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -20,5 +20,7 @@ export const FA_ICONS = {
     faEdit: faEdit,
     faTrash: faTrash,
     faPlus: faPlus,
+    faSave: faSave
+
   }
 }

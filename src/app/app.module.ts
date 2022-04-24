@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatIconModule} from '@angular/material/icon';
 import { LoadingComponent } from './shared/loading/loading.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SortColumnComponent } from './shared/sort-column/sort-column.component';
@@ -14,6 +13,13 @@ import { CustomTableComponent } from './shared/custom-table/custom-table.compone
 import { BooksComponent } from './pages/books/books.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CustomButtonComponent } from './shared/custom-button/custom-button.component';
+import { AuthorsComponent } from './pages/authors/authors.component';
+import { AuthorFormDialogComponent } from './dialog/author-form-dialog/author-form-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormErrorTextComponent } from './shared/form-error-text/form-error-text.component';
 
 @NgModule({
   declarations: [
@@ -25,14 +31,20 @@ import { CustomButtonComponent } from './shared/custom-button/custom-button.comp
     CustomTableComponent,
     BooksComponent,
     CustomButtonComponent,
+    AuthorsComponent,
+    AuthorFormDialogComponent,
+    FormErrorTextComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatIconModule,
     FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule,
+    MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
