@@ -1,4 +1,4 @@
 <section class="mt-2">
   <app-custom-button [class]="'new'" [icon]="faPlus" (click)="createNewAuthor()"></app-custom-button>
-  <app-custom-table [displayActionColumn]="true"></app-custom-table>
+  <app-custom-table [headerData]="headerData" [tableData]="authorList" [displayActionColumn]="true"></app-custom-table>
 </section>

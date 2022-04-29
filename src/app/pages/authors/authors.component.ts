@@ -52,6 +52,17 @@ export class AuthorsComponent implements OnInit, OnDestroy {
       disableClose: true,
       panelClass: 'remove-dialog-padding'
     });
+
+    newAuthorDialog.afterClosed().subscribe(resp => {
+      if (resp.save === true){
+        const author: Author = {
+          id: resp.id,
+          fullName: resp.fullName,
+          country: resp.country
+        }
+        this.authorService.saveAuthor(author).subscribe( resp => this.authorList.push(resp));
+      }
+    })
   }
 
 }

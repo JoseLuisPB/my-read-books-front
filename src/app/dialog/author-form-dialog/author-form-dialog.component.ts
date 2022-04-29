@@ -58,7 +58,7 @@ export class AuthorFormDialogComponent implements OnInit, OnDestroy {
   }
 
   closeDialog() {
-    this.authorDialogForm.close();
+    this.authorDialogForm.close({save: false});
   }
 
   saveForm():void {
@@ -66,7 +66,14 @@ export class AuthorFormDialogComponent implements OnInit, OnDestroy {
       this.utilsService.markFormGroupTouched(this.authorForm);
       return;
     }
-    console.log(this.authorForm.valid);
+    this.authorDialogForm.close(
+      {
+        save: true,
+        id: this.data.id,
+        fullName: this.authorForm.get('fullName')?.value,
+        country: this.authorForm.get('country')?.value
+      }
+    );
   }
 
 }

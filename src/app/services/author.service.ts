@@ -16,8 +16,13 @@ export class AuthorService {
 
   loadAuthors(): Observable<Author[]> {
     return this.http.get(this.url).pipe( map (resp => {
-      console.log(resp);
       return resp as Author[];
+    }));
+  }
+
+  saveAuthor(author: Author): Observable<Author> {
+    return this.http.post(this.url, author).pipe( map (resp => {
+      return resp as Author;
     }));
   }
 
