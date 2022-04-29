@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ITableHeader } from 'src/app/interfaces/tableHeader.interface';
 import { FA_ICONS } from '../fa-icons';
 
 @Component({
@@ -8,7 +9,7 @@ import { FA_ICONS } from '../fa-icons';
 })
 export class CustomTableComponent implements OnInit {
 
-  @Input() headerData: any [] = []
+  @Input() headerData: ITableHeader[] = []
   @Input() tableData: any[] = []
   @Input() width = 100;
   @Input() displayActionColumn = true;

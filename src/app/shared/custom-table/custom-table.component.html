@@ -2,8 +2,8 @@
   <thead class="table-header">
     <th *ngFor="let headData of headerData; let i = index">
       <div class="d-flex">
-        <app-sort-column [columnName]="headData" [data]="tableData"></app-sort-column>
-        <span class="ms-2">{{ headData }}</span>
+        <app-sort-column [columnName]="headData.field" [data]="tableData"></app-sort-column>
+        <span class="ms-2">{{ headData.title }}</span>
       </div>
     </th>
     <th *ngIf="displayActionColumn">
@@ -13,7 +13,7 @@
   <tbody>
     <tr *ngFor="let rowData of tableData; let i = index" [ngClass]="i % 2 === 0 ? 'row-odd' : 'row-even'">
       <td *ngFor="let header of headerData">
-        {{ rowData[header] }}
+        {{ rowData[header.field] }}
       </td>
       <td *ngIf="displayActionColumn">
         <div id="actions" class="d-flex gap-4">

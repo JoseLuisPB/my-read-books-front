@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 import { AuthorFormDialogComponent } from 'src/app/dialog/author-form-dialog/author-form-dialog.component';
+import { ITableHeader } from 'src/app/interfaces/tableHeader.interface';
+import { Author } from 'src/app/models/author.model';
+import { AuthorService } from 'src/app/services/author.service';
 import { FA_ICONS } from 'src/app/shared/fa-icons';
 
 @Component({
@@ -8,12 +12,38 @@ import { FA_ICONS } from 'src/app/shared/fa-icons';
   templateUrl: './authors.component.html',
   styleUrls: ['./authors.component.scss']
 })
-export class AuthorsComponent implements OnInit {
+export class AuthorsComponent implements OnInit, OnDestroy {
 
+  headerData: ITableHeader[] = [
+    {
+      field: 'fullName',
+      title: 'Author'
+    },
+    {
+      field: 'country',
+      title: 'Country'
+    }
+  ];
+  authorList: Author[] = [];
+  subscriptions: Subscription[] = [];
   faPlus = FA_ICONS.solid.faPlus;
-  constructor(private dialog: MatDialog) { }
+  constructor(
+    private authorService: AuthorService,
+    private dialog: MatDialog
+    )
+    { }
 
   ngOnInit(): void {
+    this.subscriptions.push(
+      this.authorService.loadAuthors().subscribe( resp => {
+        this.authorList = resp;
+      })
+    );
+
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
   createNewAuthor():void {
