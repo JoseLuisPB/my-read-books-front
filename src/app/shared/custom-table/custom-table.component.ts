@@ -13,6 +13,8 @@ export class CustomTableComponent implements OnInit {
   @Input() tableData: any[] = []
   @Input() width = 100;
   @Input() displayActionColumn = true;
+  @Input() displayEdit = true;
+  @Input() displayDelete = true;
   faEdit = FA_ICONS.solid.faEdit;
   faTrash = FA_ICONS.solid.faTrash;
   @Output() editEntry = new EventEmitter<any>();
