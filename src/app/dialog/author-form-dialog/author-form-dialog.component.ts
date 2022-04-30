@@ -14,7 +14,7 @@ import { FA_ICONS } from 'src/app/shared/fa-icons';
 export class AuthorFormDialogComponent implements OnInit, OnDestroy {
 
   faSave = FA_ICONS.solid.faSave;
-  countriesLoaded = false;
+  formDataLoaded = false;
   saveDisabled = true;
   authorForm!: FormGroup;
   subscriptions: Subscription[] = [];
@@ -36,14 +36,16 @@ export class AuthorFormDialogComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.countriesService.getCountries().subscribe( resp => {
         this.countryList = resp.sort( (a: string, b: string) => ( a < b ? -1 : 1));
-        this.countriesLoaded = true;
+        this.authorForm.patchValue(
+          {
+            fullName: this.data.author.fullName,
+            country: this.data.author.country
+          }
+        )
+        this.formDataLoaded = true;
         this.saveDisabled = false;
       })
     );
-
-    if (this.data.id !== null){
-
-    }
   }
 
   ngOnDestroy(): void {
@@ -69,7 +71,7 @@ export class AuthorFormDialogComponent implements OnInit, OnDestroy {
     this.authorDialogForm.close(
       {
         save: true,
-        id: this.data.id,
+        id: this.data.author.id,
         fullName: this.authorForm.get('fullName')?.value,
         country: this.authorForm.get('country')?.value
       }

@@ -26,4 +26,10 @@ export class AuthorService {
     }));
   }
 
+  updateAuthor(author: Author): Observable<Author> {
+    return this.http.put(this.url, author).pipe( map ( resp => {
+      return  resp as Author;
+    }));
+  }
+
 }

@@ -1,13 +1,13 @@
 <div id="dialog-container">
   <h2 class="title-format">{{ action }} author</h2>
-  <form id="formAuthor" class="d-flex flex-column" [formGroup]="authorForm">
+  <form *ngIf="formDataLoaded; else spinner" id="formAuthor" class="d-flex flex-column content-height" [formGroup]="authorForm">
     <mat-form-field>
       <mat-label>Author</mat-label>
       <input matInput type="text" formControlName="fullName">
     </mat-form-field>
     <app-form-error-text *ngIf="authorForm.controls['fullName'].invalid && authorForm.controls['fullName'].touched" [message]="'Please enter the author name'">
     </app-form-error-text>
-    <mat-form-field *ngIf="countriesLoaded; else spinner">
+    <mat-form-field>
       <mat-label>Country</mat-label>
       <mat-select formControlName="country">
         <mat-option *ngFor="let country of countryList" [value]="country">
@@ -17,10 +17,10 @@
     </mat-form-field>
     <app-form-error-text *ngIf="authorForm.controls['country'].invalid && authorForm.controls['country'].touched" [message]="'Please select a country'">
     </app-form-error-text>
-    <ng-template #spinner>
-      <app-loading class="d-flex justify-content-center my-2" ></app-loading>
-    </ng-template>
   </form>
+  <ng-template #spinner>
+    <app-loading class="d-flex justify-content-center align-items-center content-height" ></app-loading>
+  </ng-template>
   <div class="footer-format">
     <app-custom-button [icon]="faSave" [class]="'new'" [disableButton]="saveDisabled" (click)="saveForm()"></app-custom-button>
     <button class="button-format" (click)="closeDialog()">X</button>
