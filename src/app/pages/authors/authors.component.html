@@ -1,4 +1,9 @@
-<section class="mt-2">
-  <app-custom-button [class]="'new'" [icon]="faPlus" (click)="createNewAuthor()"></app-custom-button>
-  <app-custom-table [headerData]="headerData" [tableData]="authorList" [displayActionColumn]="true" [displayDelete]="false" (editEntry)="updateAuthor($event)"></app-custom-table>
+<section>
+  <div class="my-2">
+    <app-custom-button [buttonClass]="'new'" [icon]="faPlus" (click)="createNewAuthor()"></app-custom-button>
+  </div>
+  <app-custom-table *ngIf="authorsLoaded; else spinner;" [headerData]="headerData" [tableData]="authorList" [displayActionColumn]="true" [displayDelete]="false" (editEntry)="updateAuthor($event)"></app-custom-table>
+  <ng-template #spinner>
+    <app-loading class="d-flex justify-content-center my-5" [spinner]="false"></app-loading>
+  </ng-template>
 </section>

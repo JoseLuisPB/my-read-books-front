@@ -18,6 +18,7 @@ import { AuthorFormDialogComponent } from './dialog/author-form-dialog/author-fo
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormErrorTextComponent } from './shared/form-error-text/form-error-text.component';
 
@@ -33,7 +34,7 @@ import { FormErrorTextComponent } from './shared/form-error-text/form-error-text
     CustomButtonComponent,
     AuthorsComponent,
     AuthorFormDialogComponent,
-    FormErrorTextComponent
+    FormErrorTextComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,6 +45,7 @@ import { FormErrorTextComponent } from './shared/form-error-text/form-error-text
     MatDialogModule,
     MatInputModule,
     MatSelectModule,
+    MatSnackBarModule,
     ReactiveFormsModule,
   ],
   providers: [],

@@ -16,3 +16,26 @@ body {
 .remove-dialog-padding .mat-dialog-container{
   padding: 0;
 }
+
+.snack-format{
+  color: white;
+  font-size: 18px;
+
+  .mat-simple-snackbar {
+    font-size: 18px;
+  }
+  .mat-simple-snackbar-action button{
+    font-size: 18px;
+    color: white;
+  }
+}
+
+.snackSuccess{
+  @extend .snack-format;
+  background-color: $snackSuccess;
+}
+
+.snackError{
+  @extend .snack-format;
+  background-color: $snackError;
+}

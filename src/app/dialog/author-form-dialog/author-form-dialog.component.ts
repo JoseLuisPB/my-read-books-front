@@ -56,7 +56,7 @@ export class AuthorFormDialogComponent implements OnInit, OnDestroy {
     this.authorForm = this.formBuilder.group({
       fullName:['', Validators.required],
       country:['', Validators.required]
-    })
+    });
   }
 
   closeDialog() {

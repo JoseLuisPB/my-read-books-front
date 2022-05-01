@@ -17,8 +17,8 @@
       </td>
       <td *ngIf="displayActionColumn">
         <div id="actions" class="d-flex gap-4">
-          <app-custom-button *ngIf="displayEdit" [icon]="faEdit" [class]="'edit'" [title]="'edit'"  (click)="edit(rowData)"></app-custom-button>
-          <app-custom-button *ngIf="displayDelete" [icon]="faTrash" [class]="'delete'" [title]="'delete'" (click)="delete(rowData)"></app-custom-button>
+          <app-custom-button *ngIf="displayEdit" [icon]="faEdit" [buttonClass]="'edit'" [title]="'edit'"  (click)="edit(rowData)"></app-custom-button>
+          <app-custom-button *ngIf="displayDelete" [icon]="faTrash" [buttonClass]="'delete'" [title]="'delete'" (click)="delete(rowData)"></app-custom-button>
         </div>
       </td>
     </tr>
