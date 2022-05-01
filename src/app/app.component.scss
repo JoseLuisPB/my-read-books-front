@@ -1,9 +1,24 @@
+$marginLeft: 5%;
+$marginTop: 0;
+$marginRight: 5%;
+$marginBottom: 0;
+$marginLeftMobile: 1%;
+$marginTopMobile: 0;
+$marginRightMobile: 1%;
+$marginBottomMobile: 0;
+
 .margin-format{
-  margin: 0 5%;
+  margin-left: $marginLeft;
+  margin-top: $marginTop;
+  margin-right: $marginRight;
+  margin-bottom: $marginBottom;
 }
 
 @media screen and (max-width: 576px){
   main {
-    margin: 0 1%;
+    margin-left: $marginLeftMobile;
+    margin-top: $marginTopMobile;
+    margin-right: $marginRightMobile;
+    margin-bottom: $marginBottomMobile;
   }
 }
