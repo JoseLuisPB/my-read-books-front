@@ -1,11 +1,8 @@
 @import '../../shared/colors.scss';
+@import '../../shared/custom-formats.scss';
 
 .button-format{
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: transparent;
-  color: white;
+  @include button-format;
   background-color: $delete;
 }
 
@@ -22,18 +19,10 @@
 }
 
 .title-format{
-  background-color: $navbar;
-  line-height: 60px;
-  padding-left:5%;
+  @include title-format;
   color: $warning;
 }
 
 .footer-format{
-  background-color: $navbar;
-  height: 60px;
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  column-gap: 1rem;
-  padding-right: 10px;
+  @include footer-format;
 }
