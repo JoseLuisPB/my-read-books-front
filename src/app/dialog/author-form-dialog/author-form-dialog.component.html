@@ -19,7 +19,7 @@
     </app-form-error-text>
   </form>
   <ng-template #spinner>
-    <app-loading class="d-flex justify-content-center align-items-center content-height" ></app-loading>
+    <app-loading class="d-flex justify-content-center align-items-center content-height" [spinner]="false" ></app-loading>
   </ng-template>
   <div class="footer-format">
     <app-custom-button [icon]="faSave" [buttonClass]="'new'" [disableButton]="saveDisabled" (click)="saveForm()"></app-custom-button>
