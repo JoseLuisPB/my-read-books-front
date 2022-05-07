@@ -1,9 +1,5 @@
-
 @import '../../shared/colors.scss';
 
-#dialog-container{
-  min-width: 400px;
-}
 .button-format{
   width: 50px;
   height: 50px;
@@ -13,35 +9,31 @@
   background-color: $delete;
 }
 
+.content{
+  display: flex;
+  align-items: center;
+  column-gap: 1rem;
+  margin: 3% 5%;
+}
+
+.icon{
+  color: $warning;
+  font-size: 40px;
+}
+
 .title-format{
   background-color: $navbar;
-  line-height: 80px;
-  text-align: center;
-  color: $title;
-}
-
-form{
-  margin: 2% 5%;
-}
-
-.content-height{
-  height: 250px;
+  line-height: 60px;
+  padding-left:5%;
+  color: $warning;
 }
 
 .footer-format{
   background-color: $navbar;
-  height: 80px;
+  height: 60px;
   display: flex;
   justify-content: end;
   align-items: center;
   column-gap: 1rem;
   padding-right: 10px;
 }
-
-@media screen and (max-width: 550px){
-  #dialog-container{
-    width: 300px;
-  }
-}
-
-

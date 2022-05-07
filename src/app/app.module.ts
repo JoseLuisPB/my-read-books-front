@@ -21,6 +21,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormErrorTextComponent } from './shared/form-error-text/form-error-text.component';
+import { BookFormDialogComponent } from './dialog/book-form-dialog/book-form-dialog.component';
+import { ConfirmDialogComponent } from './dialog/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { FormErrorTextComponent } from './shared/form-error-text/form-error-text
     AuthorsComponent,
     AuthorFormDialogComponent,
     FormErrorTextComponent,
+    BookFormDialogComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,

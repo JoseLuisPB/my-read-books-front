@@ -13,9 +13,15 @@ export class BooksService {
     this.url = '/book/'
   }
 
+  loadBooks(): Observable<Book[]> {
+    return this.http.get(this.url).pipe( map(resp => {
+      console.log(resp);
+      return resp as Book[];
+    }) );
+  }
+
   loadLastNBooks(records: number): Observable<Book[]> {
     return this.http.get(`${this.url}lastNBooks/${records}`).pipe( map( resp => {
-      console.log(resp);
       return resp as Book[];
     }));
   }

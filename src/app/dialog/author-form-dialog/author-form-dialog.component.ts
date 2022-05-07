@@ -1,10 +1,11 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { CountriesService } from 'src/app/services/countries.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { FA_ICONS } from 'src/app/shared/fa-icons';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-author-form-dialog',
@@ -26,6 +27,7 @@ export class AuthorFormDialogComponent implements OnInit, OnDestroy {
     private countriesService: CountriesService,
     private utilsService: UtilsService,
     private authorDialogForm: MatDialogRef<AuthorFormDialogComponent>,
+    private confirmDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) private data: any
   ) {
     this.action = this.data.action;
@@ -60,7 +62,17 @@ export class AuthorFormDialogComponent implements OnInit, OnDestroy {
   }
 
   closeDialog() {
-    this.authorDialogForm.close({save: false});
+    if( this.authorForm.touched) {
+      const dialogConfirm = this.confirmDialog.open(ConfirmDialogComponent, {
+        disableClose: true,
+        panelClass: 'remove-dialog-padding'
+      });
+      dialogConfirm.afterClosed().subscribe(resp => {
+        if (resp.close) this.authorDialogForm.close({save: false});
+      });
+    } else {
+      this.authorDialogForm.close({save: false});
+    }
   }
 
   saveForm():void {
