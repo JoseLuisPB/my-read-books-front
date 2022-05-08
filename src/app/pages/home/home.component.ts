@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BooksService } from 'src/app/services/books.service';
-import { Book } from 'src/app/models/book.model';
 import { Subscription } from 'rxjs';
 import { ITableHeader } from 'src/app/interfaces/tableHeader.interface';
+import { BookDto } from 'src/app/models/bookDto.model';
+import { TABLE_HEADER_BOOKS } from 'src/app/constants/headerData';
 
 @Component({
   selector: 'app-home',
@@ -11,22 +12,9 @@ import { ITableHeader } from 'src/app/interfaces/tableHeader.interface';
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
-  headerData: ITableHeader[] = [
-    {
-      field: 'author',
-      title: 'Author'
-    },
-    {
-      field: 'title',
-      title: 'Title'
-    },
-    {
-      field: 'year',
-      title: 'Year'
-    }
-  ];
-  tableData: Book[] = [];
   isLoading = true;
+  headerData: ITableHeader[] = TABLE_HEADER_BOOKS;
+  tableData: BookDto[] = [];
   subscriptions: Subscription[] = [];
 
   constructor(
@@ -35,8 +23,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscriptions.push(
-      this.booksService.loadLastNBooks(10).subscribe( resp => {
-        this.tableData = resp;
+      this.booksService.loadLastNBooks(10).subscribe( books => {
+        this.tableData = books;
         this.isLoading = false;
       }, error => {
         console.error(error);

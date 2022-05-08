@@ -38,12 +38,7 @@ export class AuthorFormDialogComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.countriesService.getCountries().subscribe( resp => {
         this.countryList = resp.sort( (a: string, b: string) => ( a < b ? -1 : 1));
-        this.authorForm.patchValue(
-          {
-            fullName: this.data.author.fullName,
-            country: this.data.author.country
-          }
-        )
+        if (this.data.author.id) this.formPatchValue();
         this.formDataLoaded = true;
         this.saveDisabled = false;
       })
@@ -59,6 +54,15 @@ export class AuthorFormDialogComponent implements OnInit, OnDestroy {
       fullName:['', Validators.required],
       country:['', Validators.required]
     });
+  }
+
+  formPatchValue(): void {
+    this.authorForm.patchValue(
+      {
+        fullName: this.data.author.fullName,
+        country: this.data.author.country
+      }
+    )
   }
 
   closeDialog() {
@@ -83,9 +87,11 @@ export class AuthorFormDialogComponent implements OnInit, OnDestroy {
     this.authorDialogForm.close(
       {
         save: true,
-        id: this.data.author.id,
-        fullName: this.authorForm.get('fullName')?.value,
-        country: this.authorForm.get('country')?.value
+        author: {
+          id: this.data.author.id,
+          fullName: this.authorForm.get('fullName')?.value,
+          country: this.authorForm.get('country')?.value
+        }
       }
     );
   }

@@ -1,16 +1,14 @@
-<div class="pb-3">
-  <section>
-    <h1 class="d-flex justify-content-center">Welcome to my read books app</h1>
-    <div>
-      <p>I have created this application to keep track of the books I have read each year.</p>
-      <p>The list below display the last 10 books I have read</p>
-    </div>
-  </section>
-  <hr>
-  <section *ngIf="!isLoading; else loading">
-      <app-custom-table [width]="100" [headerData]="headerData" [tableData]="tableData" [displayActionColumn]="false"></app-custom-table>
-  </section>
-  <ng-template #loading>
-    <app-loading class="d-flex justify-content-center" [spinner]="false"></app-loading>
-  </ng-template>
-</div>
+<section>
+  <h1 class="d-flex justify-content-center">Welcome to my read books app</h1>
+  <div>
+    <p>I have created this application to keep track of the books I have read each year.</p>
+    <p>The list below display the last 10 books I have read</p>
+  </div>
+</section>
+<hr>
+<section *ngIf="!isLoading; else loading">
+    <app-custom-table [width]="100" [headerData]="headerData" [tableData]="tableData" [displayActionColumn]="false"></app-custom-table>
+</section>
+<ng-template #loading>
+  <app-loading class="d-flex justify-content-center" [spinner]="false"></app-loading>
+</ng-template>

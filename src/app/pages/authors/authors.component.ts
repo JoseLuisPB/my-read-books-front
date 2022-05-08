@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
+import { TABLE_HEADER_AUTHORS } from 'src/app/constants/headerData';
 import { AuthorFormDialogComponent } from 'src/app/dialog/author-form-dialog/author-form-dialog.component';
 import { ITableHeader } from 'src/app/interfaces/tableHeader.interface';
 import { Author } from 'src/app/models/author.model';
@@ -15,17 +16,8 @@ import { FA_ICONS } from 'src/app/shared/fa-icons';
 })
 export class AuthorsComponent implements OnInit, OnDestroy {
 
-  headerData: ITableHeader[] = [
-    {
-      field: 'fullName',
-      title: 'Author'
-    },
-    {
-      field: 'country',
-      title: 'Country'
-    }
-  ];
   authorsLoaded = false;
+  headerData: ITableHeader[] = TABLE_HEADER_AUTHORS;
   authorList: Author[] = [];
   subscriptions: Subscription[] = [];
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
@@ -52,24 +44,25 @@ export class AuthorsComponent implements OnInit, OnDestroy {
       this.authorService.loadAuthors().subscribe( authors => {
         this.authorList = authors;
         this.authorsLoaded = true;
+      }, error => {
+        console.error(error);
       })
     );
   }
 
   createNewAuthor():void {
     const newAuthorDialog = this.dialog.open(AuthorFormDialogComponent, {
-      data: {author: {id: null, fullName: null, country: null}, action:'Create'},
+      data: {author: {id: null}, action:'Create'},
       disableClose: true,
       panelClass: 'remove-dialog-padding'
     });
 
     this.subscriptions.push(
-      newAuthorDialog.afterClosed().subscribe(resp => {
-        if (resp.save === true){
-          const author: Author = this.createAuthorDto(resp);
-          this.authorService.saveAuthor(author).subscribe( resp => {
+      newAuthorDialog.afterClosed().subscribe(dialogResp => {
+        if (dialogResp.save === true){
+          this.authorService.saveAuthor(dialogResp.author).subscribe( serviceResp => {
             this.displaySnackBar('Author created', 'snackSuccess');
-            this.authorList.push(resp)
+            this.authorList.push(serviceResp)
           }, error => {
             this.displaySnackBar('Oops something went wrong, try again', 'snackError');
             console.error(error);
@@ -81,15 +74,6 @@ export class AuthorsComponent implements OnInit, OnDestroy {
     );
   }
 
-  createAuthorDto(author: any): Author {
-    const authorDto: Author = {
-      id: author.id,
-      fullName: author.fullName,
-      country: author.country
-    }
-    return authorDto;
-  }
-
   updateAuthor(event: Author):void {
     const updateAuthorDialog = this.dialog.open(AuthorFormDialogComponent, {
       data:{author: event,action:'Modify'},
@@ -99,8 +83,7 @@ export class AuthorsComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       updateAuthorDialog.afterClosed().subscribe( resp => {
         if (resp.save === true){
-          const author: Author = this.createAuthorDto(resp);
-          this.authorService.updateAuthor(author).subscribe( () => {
+          this.authorService.updateAuthor(resp.author).subscribe( () => {
             this.displaySnackBar('Author modfied', 'snackSuccess');
             this.loadAuthorList();
           }, error => {
@@ -129,5 +112,4 @@ export class AuthorsComponent implements OnInit, OnDestroy {
   closeSnackBar(): void {
     this.snackBar.dismiss();
   }
-
 }

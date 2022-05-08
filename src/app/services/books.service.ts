@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 
 import { map } from 'rxjs/operators'
 import { Book } from "../models/book.model";
+import { BookDto } from "../models/bookDto.model";
 
 @Injectable({providedIn: 'root'})
 export class BooksService {
@@ -13,15 +14,15 @@ export class BooksService {
     this.url = '/book/'
   }
 
-  loadBooks(): Observable<Book[]> {
+  loadBooks(): Observable<BookDto[]> {
     return this.http.get(this.url).pipe( map(resp => {
-      return resp as Book[];
+      return resp as BookDto[];
     }) );
   }
 
-  loadLastNBooks(records: number): Observable<Book[]> {
+  loadLastNBooks(records: number): Observable<BookDto[]> {
     return this.http.get(`${this.url}lastNBooks/${records}`).pipe( map( resp => {
-      return resp as Book[];
+      return resp as BookDto[];
     }));
   }
 
