@@ -2,5 +2,5 @@
   <div class="my-2">
     <app-custom-button [icon]="faPlus" [buttonClass]="'new'" (click)="createNewBook()"></app-custom-button>
   </div>
-  <app-custom-table [headerData]="headerData" [tableData]="tableData" [displayActionColumn]="true"></app-custom-table>
+  <app-custom-table [headerData]="headerData" [tableData]="tableData" [displayActionColumn]="true" (editEntry)="updateBook($event)" (deleteEntry)="deleteBook($event)"></app-custom-table>
 </section>

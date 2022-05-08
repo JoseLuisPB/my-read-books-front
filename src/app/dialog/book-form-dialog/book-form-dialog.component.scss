@@ -1,0 +1,34 @@
+
+@import '../../shared/colors.scss';
+@import '../../shared/custom-formats.scss';
+
+#dialog-container{
+  min-width: 400px;
+}
+.button-format{
+  @include button-format;
+  background-color: $delete;
+}
+
+.title-format{
+  @include title-format;
+  color: $title;
+}
+
+form{
+  margin: 2% 5%;
+}
+
+.content-height{
+  height: 320px;
+}
+
+.footer-format{
+  @include footer-format;
+}
+
+@media screen and (max-width: 550px){
+  #dialog-container{
+    width: 300px;
+  }
+}

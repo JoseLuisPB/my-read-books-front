@@ -1,1 +1,34 @@
-<p>book-form-dialog works!</p>
+<div id="dialog-container">
+  <h2 class="title-format"> {{ action }} book</h2>
+  <form *ngIf="formDataLoaded; else spinner" [formGroup]="bookForm" class="d-flex flex-column content-height">
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input matInput type="text" formControlName="title">
+    </mat-form-field>
+    <app-form-error-text *ngIf="bookForm.controls['title'].invalid && bookForm.controls['title'].touched" [message]="'Please enter the title'">
+    </app-form-error-text>
+    <mat-form-field>
+      <mat-label>Year</mat-label>
+      <input matInput type="number" formControlName="year" />
+    </mat-form-field>
+    <app-form-error-text *ngIf="bookForm.controls['year'].invalid && bookForm.controls['year'].touched" [message]="'Please enter a year'">
+    </app-form-error-text>
+    <mat-form-field>
+      <mat-label>Author</mat-label>
+      <mat-select formControlName="author">
+        <mat-option *ngFor="let author of authorList" [value]="author.id">
+          {{ author.fullName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <app-form-error-text *ngIf="bookForm.controls['author'].invalid && bookForm.controls['author'].touched" [message]="'Please select an author'">
+    </app-form-error-text>
+  </form>
+  <ng-template #spinner>
+    <app-loading class="d-flex justify-content-center align-items-center content-height" [spinner]="false" ></app-loading>
+  </ng-template>
+  <div class="footer-format">
+    <app-custom-button [icon]="faSave" [buttonClass]="'new'" [disableButton]="saveDisabled" (click)="saveForm()"></app-custom-button>
+    <button class="button-format" (click)="closeDialog()">X</button>
+  </div>
+</div>

@@ -15,7 +15,6 @@ export class BooksService {
 
   loadBooks(): Observable<Book[]> {
     return this.http.get(this.url).pipe( map(resp => {
-      console.log(resp);
       return resp as Book[];
     }) );
   }
@@ -24,5 +23,19 @@ export class BooksService {
     return this.http.get(`${this.url}lastNBooks/${records}`).pipe( map( resp => {
       return resp as Book[];
     }));
+  }
+
+  saveBook(book: Book): Observable<Book>{
+    return this.http.post(this.url, book).pipe( map(resp => {
+      return resp as Book;
+    }))
+  }
+
+  updateBook(book: Book): Observable<any> {
+    return this.http.put(this.url, book);
+  }
+
+  deleteBook(id: number): Observable<any> {
+    return this.http.delete(`${this.url}/${id}`);
   }
 }
