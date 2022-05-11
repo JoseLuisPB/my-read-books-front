@@ -2,5 +2,8 @@
   <div class="my-2">
     <app-custom-button [icon]="faPlus" [buttonClass]="'new'" (click)="createNewBook()"></app-custom-button>
   </div>
-  <app-custom-table [headerData]="headerData" [tableData]="tableData" [displayActionColumn]="true" (editEntry)="updateBook($event)" (deleteEntry)="deleteBook($event)"></app-custom-table>
+  <app-custom-table *ngIf="!isLoading; else load" [headerData]="headerData" [tableData]="tableData" [displayActionColumn]="true" (editEntry)="updateBook($event)" (deleteEntry)="deleteBook($event)"></app-custom-table>
+  <ng-template #load>
+    <app-loading class="d-flex justify-content-center mt-5" [spinner]="false"></app-loading>
+  </ng-template>
 </section>

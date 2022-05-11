@@ -4,10 +4,11 @@ import { Subscription } from 'rxjs';
 import { TABLE_HEADER_BOOKS } from 'src/app/constants/headerData';
 import { BookFormDialogComponent } from 'src/app/dialog/book-form-dialog/book-form-dialog.component';
 import { IBook } from 'src/app/interfaces/book.interface';
+import { ISnackBar } from 'src/app/interfaces/snackBar.interface';
 import { ITableHeader } from 'src/app/interfaces/tableHeader.interface';
-import { Book } from 'src/app/models/book.model';
 import { BookDto } from 'src/app/models/bookDto.model';
 import { BooksService } from 'src/app/services/books.service';
+import { UtilsService } from 'src/app/services/utils.service';
 import { FA_ICONS } from 'src/app/shared/fa-icons';
 
 @Component({
@@ -20,17 +21,34 @@ export class BooksComponent implements OnInit, OnDestroy {
   headerData: ITableHeader[] = TABLE_HEADER_BOOKS;
   tableData: BookDto[] = [];
   subscriptions: Subscription[] = [];
+  snackBarOptions: ISnackBar;
+  isLoading = true;
   faPlus = FA_ICONS.solid.faPlus;
 
   constructor(
     private booksService: BooksService,
     private dialog: MatDialog,
-  ) { }
+    private utilsService: UtilsService
+  ) {
+    this.snackBarOptions = {
+      message: '',
+        panel: '',
+        horizontalPosition: 'end',
+        verticalPosition: 'top',
+        time: 3000
+    }
+  }
 
   ngOnInit(): void {
+    this.loadBooks();
+  }
+
+  loadBooks(): void {
+    this.isLoading = true;
     this.subscriptions.push(
       this.booksService.loadBooks().subscribe( books => {
         this.tableData = books;
+        this.isLoading = false;
       }, error => {
         console.error(error);
       })
@@ -49,10 +67,22 @@ export class BooksComponent implements OnInit, OnDestroy {
     });
     newBookDialog.afterClosed().subscribe(resp => {
       if(resp.save){
-        this.booksService.saveBook(resp.book).subscribe( book => {
-          console.log(book);
-        })
+        this.subscriptions.push(
+          this.booksService.saveBook(resp.book).subscribe( () => {
+            this.snackBarOptions.message = 'Book created';
+            this.snackBarOptions.panel = 'snackSuccess';
+            this.utilsService.displaySnackBar(this.snackBarOptions);
+            this.loadBooks();
+          }, error => {
+            this.snackBarOptions.message = 'Oops something went wrong, try again';
+            this.snackBarOptions.panel = 'snackError';
+            this.utilsService.displaySnackBar(this.snackBarOptions);
+            console.error(error);
+          })
+        );
       }
+    }, error => {
+      console.error(error);
     })
   }
 
@@ -74,9 +104,19 @@ export class BooksComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       updateBookDialog.afterClosed().subscribe(resp => {
         if ( resp.save) {
-          this.booksService.updateBook(resp.book).subscribe(response => {
-            console.log(response);
-          })
+          this.subscriptions.push(
+            this.booksService.updateBook(resp.book).subscribe( () => {
+              this.snackBarOptions.message = 'Book updated';
+              this.snackBarOptions.panel = 'snackSuccess';
+              this.utilsService.displaySnackBar(this.snackBarOptions);
+              this.loadBooks();
+            }, error => {
+              this.snackBarOptions.message = 'Oops something went wrong, try again';
+              this.snackBarOptions.panel = 'snackError';
+              this.utilsService.displaySnackBar(this.snackBarOptions);
+              console.error(error);
+            })
+          );
         }
       }, error => {
         console.error(error);
@@ -85,7 +125,18 @@ export class BooksComponent implements OnInit, OnDestroy {
   }
 
   deleteBook(book: IBook): void {
-    this.booksService.deleteBook(book.id).subscribe(resp => console.log(resp));
+    this.subscriptions.push(
+      this.booksService.deleteBook(book.id).subscribe( () => {
+        this.snackBarOptions.message = 'Book deleted';
+        this.snackBarOptions.panel = 'snackSuccess';
+        this.utilsService.displaySnackBar(this.snackBarOptions);
+        this.loadBooks();
+      }, error => {
+        console.error(error);
+        this.snackBarOptions.message = 'Oops something went wrong, try again';
+        this.snackBarOptions.panel = 'snackError';
+        this.utilsService.displaySnackBar(this.snackBarOptions);
+      })
+    );
   }
-
 }
