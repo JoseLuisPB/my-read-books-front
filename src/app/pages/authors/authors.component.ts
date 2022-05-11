@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { TABLE_HEADER_AUTHORS } from 'src/app/constants/headerData';
 import { AuthorFormDialogComponent } from 'src/app/dialog/author-form-dialog/author-form-dialog.component';
@@ -71,13 +70,10 @@ export class AuthorsComponent implements OnInit, OnDestroy {
         if (dialogResp.save === true){
           this.authorService.saveAuthor(dialogResp.author).subscribe( serviceResp => {
             this.snackBarOptions.message = 'Author created';
-            this.snackBarOptions.panel = 'snackSuccess';
             this.utilsService.displaySnackBar(this.snackBarOptions);
             this.authorList.push(serviceResp)
           }, error => {
-            this.snackBarOptions.message = 'Oops something went wrong, try again';
-            this.snackBarOptions.panel = 'snackError';
-            this.utilsService.displaySnackBar(this.snackBarOptions);
+            this.utilsService.displaySnackBar(this.snackBarOptions, true);
             console.error(error);
           });
         }
@@ -98,13 +94,10 @@ export class AuthorsComponent implements OnInit, OnDestroy {
         if (resp.save === true){
           this.authorService.updateAuthor(resp.author).subscribe( () => {
             this.snackBarOptions.message = 'Author modfied';
-            this.snackBarOptions.panel = 'snackSuccess'
             this.utilsService.displaySnackBar(this.snackBarOptions);
             this.loadAuthorList();
           }, error => {
-            this.snackBarOptions.message = 'Oops something went wrong, try again';
-            this.snackBarOptions.panel = 'snackError';
-            this.utilsService.displaySnackBar(this.snackBarOptions);
+            this.utilsService.displaySnackBar(this.snackBarOptions, true);
             console.error(error);
           });
         }

@@ -70,13 +70,10 @@ export class BooksComponent implements OnInit, OnDestroy {
         this.subscriptions.push(
           this.booksService.saveBook(resp.book).subscribe( () => {
             this.snackBarOptions.message = 'Book created';
-            this.snackBarOptions.panel = 'snackSuccess';
             this.utilsService.displaySnackBar(this.snackBarOptions);
             this.loadBooks();
           }, error => {
-            this.snackBarOptions.message = 'Oops something went wrong, try again';
-            this.snackBarOptions.panel = 'snackError';
-            this.utilsService.displaySnackBar(this.snackBarOptions);
+            this.utilsService.displaySnackBar(this.snackBarOptions, true);
             console.error(error);
           })
         );
@@ -107,13 +104,10 @@ export class BooksComponent implements OnInit, OnDestroy {
           this.subscriptions.push(
             this.booksService.updateBook(resp.book).subscribe( () => {
               this.snackBarOptions.message = 'Book updated';
-              this.snackBarOptions.panel = 'snackSuccess';
               this.utilsService.displaySnackBar(this.snackBarOptions);
               this.loadBooks();
             }, error => {
-              this.snackBarOptions.message = 'Oops something went wrong, try again';
-              this.snackBarOptions.panel = 'snackError';
-              this.utilsService.displaySnackBar(this.snackBarOptions);
+              this.utilsService.displaySnackBar(this.snackBarOptions, true);
               console.error(error);
             })
           );
@@ -128,14 +122,11 @@ export class BooksComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.booksService.deleteBook(book.id).subscribe( () => {
         this.snackBarOptions.message = 'Book deleted';
-        this.snackBarOptions.panel = 'snackSuccess';
         this.utilsService.displaySnackBar(this.snackBarOptions);
         this.loadBooks();
       }, error => {
         console.error(error);
-        this.snackBarOptions.message = 'Oops something went wrong, try again';
-        this.snackBarOptions.panel = 'snackError';
-        this.utilsService.displaySnackBar(this.snackBarOptions);
+        this.utilsService.displaySnackBar(this.snackBarOptions, true);
       })
     );
   }

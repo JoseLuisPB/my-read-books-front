@@ -19,20 +19,21 @@ export class UtilsService {
     })
   }
 
-  displaySnackBar(snackBarOptions: ISnackBar): void{
+  displaySnackBar(snackBarOptions: ISnackBar, error = false): void{
+    if(error) snackBarOptions.message = 'Oops something went wrong, try again'
     const time = snackBarOptions.time ?? 3000;
-    this.openSnackBar(snackBarOptions);
+    this.openSnackBar(snackBarOptions, error);
     setTimeout( () => this.closeSnackBar(), time);
   }
-  openSnackBar(snackBarOptions: ISnackBar): void {
+  private openSnackBar(snackBarOptions: ISnackBar, error: boolean): void {
     this.snackBar.open(snackBarOptions.message, 'x',
       {
         horizontalPosition: snackBarOptions.horizontalPosition,
         verticalPosition: snackBarOptions.verticalPosition,
-        panelClass: snackBarOptions.panel
+        panelClass: error ? 'snackError' : 'snackSuccess'
       });
   }
-  closeSnackBar(): void {
+  private closeSnackBar(): void {
     this.snackBar.dismiss();
   }
 }
