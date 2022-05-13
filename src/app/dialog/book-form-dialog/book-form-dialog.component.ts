@@ -1,11 +1,12 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { Author } from 'src/app/models/author.model';
 import { AuthorService } from 'src/app/services/author.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { FA_ICONS } from 'src/app/shared/fa-icons';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-book-form-dialog',
@@ -27,6 +28,7 @@ export class BookFormDialogComponent implements OnInit, OnDestroy {
     private authorService: AuthorService,
     private utilService: UtilsService,
     private bookDialogForm: MatDialogRef<BookFormDialogComponent>,
+    private confirmDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) private data: any
   ) {
     this.action = this.data.action;
@@ -73,7 +75,22 @@ export class BookFormDialogComponent implements OnInit, OnDestroy {
   }
 
   closeDialog(): void {
-    this.bookDialogForm.close({save: false});
+    if(this.bookForm.touched) {
+      const dialogConfirm = this.confirmDialog.open(ConfirmDialogComponent, {
+        disableClose: true,
+        panelClass: 'remove-dialog-padding'
+      });
+
+      this.subscriptions.push(
+        dialogConfirm.afterClosed().subscribe( resp => {
+          if(resp.close) this.bookDialogForm.close({save: false});
+        }, error => {
+          console.error(error);
+        })
+      )
+    } else {
+      this.bookDialogForm.close({save: false});
+    }
   }
 
   saveForm(): void{
@@ -91,5 +108,4 @@ export class BookFormDialogComponent implements OnInit, OnDestroy {
       }
     });
   }
-
 }
