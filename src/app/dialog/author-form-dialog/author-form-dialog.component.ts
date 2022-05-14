@@ -71,8 +71,8 @@ export class AuthorFormDialogComponent implements OnInit, OnDestroy {
         disableClose: true,
         panelClass: 'remove-dialog-padding'
       });
-      dialogConfirm.afterClosed().subscribe(resp => {
-        if (resp.close) this.authorDialogForm.close({save: false});
+      dialogConfirm.afterClosed().subscribe(dialog => {
+        if (dialog.confirm) this.authorDialogForm.close({save: false});
       });
     } else {
       this.authorDialogForm.close({save: false});

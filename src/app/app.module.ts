@@ -23,6 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormErrorTextComponent } from './shared/form-error-text/form-error-text.component';
 import { BookFormDialogComponent } from './dialog/book-form-dialog/book-form-dialog.component';
 import { ConfirmDialogComponent } from './dialog/confirm-dialog/confirm-dialog.component';
+import { DeleteDialogComponent } from './dialog/delete-dialog/delete-dialog.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ConfirmDialogComponent } from './dialog/confirm-dialog/confirm-dialog.c
     FormErrorTextComponent,
     BookFormDialogComponent,
     ConfirmDialogComponent,
+    DeleteDialogComponent,
   ],
   imports: [
     BrowserModule,

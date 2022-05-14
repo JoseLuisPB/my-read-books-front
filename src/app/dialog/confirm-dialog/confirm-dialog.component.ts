@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FA_ICONS } from 'src/app/shared/fa-icons';
 
 @Component({
@@ -13,18 +13,17 @@ export class ConfirmDialogComponent implements OnInit {
   faExclamationTriangle = FA_ICONS.solid.faExclamationTriangle;
 
   constructor(
-    private confirmDialog: MatDialogRef<ConfirmDialogComponent>
-  ) { }
+    private confirmDialog: MatDialogRef<ConfirmDialogComponent>,
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   close(close: boolean): void {
     if(close) {
-      this.confirmDialog.close({close: true});
+      this.confirmDialog.close({confirm: true});
       return;
     };
-    this.confirmDialog.close({close: false});
+    this.confirmDialog.close({confirm: false});
   }
 
 }

@@ -1,0 +1,28 @@
+@import '../../shared/colors.scss';
+@import '../../shared/custom-formats.scss';
+
+.button-format{
+  @include button-format;
+  background-color: $delete;
+}
+
+.content{
+  display: flex;
+  align-items: center;
+  column-gap: 1rem;
+  margin: 3% 5%;
+}
+
+.icon{
+  color: $warning;
+  font-size: 40px;
+}
+
+.title-format{
+  @include title-format;
+  color: $warning;
+}
+
+.footer-format{
+  @include footer-format;
+}

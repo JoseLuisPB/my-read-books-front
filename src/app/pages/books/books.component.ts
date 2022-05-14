@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { TABLE_HEADER_BOOKS } from 'src/app/constants/headerData';
 import { BookFormDialogComponent } from 'src/app/dialog/book-form-dialog/book-form-dialog.component';
+import { DeleteDialogComponent } from 'src/app/dialog/delete-dialog/delete-dialog.component';
 import { IBook } from 'src/app/interfaces/book.interface';
 import { ISnackBar } from 'src/app/interfaces/snackBar.interface';
 import { ITableHeader } from 'src/app/interfaces/tableHeader.interface';
@@ -119,14 +120,28 @@ export class BooksComponent implements OnInit, OnDestroy {
   }
 
   deleteBook(book: IBook): void {
+    const deleteDialog = this.dialog.open(DeleteDialogComponent, {
+      data: { bookTitle: book.title },
+      disableClose: true,
+      panelClass: 'remove-dialog-padding'
+    });
+
     this.subscriptions.push(
-      this.booksService.deleteBook(book.id).subscribe( () => {
-        this.snackBarOptions.message = 'Book deleted';
-        this.utilsService.displaySnackBar(this.snackBarOptions);
-        this.loadBooks();
+      deleteDialog.afterClosed().subscribe(dialog => {
+        if(dialog.delete) {
+          this.subscriptions.push(
+            this.booksService.deleteBook(book.id).subscribe( () => {
+              this.snackBarOptions.message = 'Book deleted';
+              this.utilsService.displaySnackBar(this.snackBarOptions);
+              this.loadBooks();
+            }, error => {
+              console.error(error);
+              this.utilsService.displaySnackBar(this.snackBarOptions, true);
+            })
+          )
+        }
       }, error => {
         console.error(error);
-        this.utilsService.displaySnackBar(this.snackBarOptions, true);
       })
     );
   }

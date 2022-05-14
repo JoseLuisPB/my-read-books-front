@@ -82,8 +82,8 @@ export class BookFormDialogComponent implements OnInit, OnDestroy {
       });
 
       this.subscriptions.push(
-        dialogConfirm.afterClosed().subscribe( resp => {
-          if(resp.close) this.bookDialogForm.close({save: false});
+        dialogConfirm.afterClosed().subscribe( dialog => {
+          if(dialog.confirm) this.bookDialogForm.close({save: false});
         }, error => {
           console.error(error);
         })
