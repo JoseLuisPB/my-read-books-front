@@ -1,0 +1,11 @@
+@import '../colors.scss';
+
+button {
+  background-color: transparent;
+  color: white;
+  border: transparent;
+}
+
+.currentPage{
+  color: $title;
+}

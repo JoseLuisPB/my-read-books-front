@@ -24,6 +24,7 @@ import { FormErrorTextComponent } from './shared/form-error-text/form-error-text
 import { BookFormDialogComponent } from './dialog/book-form-dialog/book-form-dialog.component';
 import { ConfirmDialogComponent } from './dialog/confirm-dialog/confirm-dialog.component';
 import { DeleteDialogComponent } from './dialog/delete-dialog/delete-dialog.component';
+import { PaginationComponent } from './shared/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { DeleteDialogComponent } from './dialog/delete-dialog/delete-dialog.comp
     BookFormDialogComponent,
     ConfirmDialogComponent,
     DeleteDialogComponent,
+    PaginationComponent,
   ],
   imports: [
     BrowserModule,

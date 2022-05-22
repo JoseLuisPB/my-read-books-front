@@ -1,6 +1,5 @@
 import { faHome, faCog, faBook,  faUsers, faGlobe, faChartLine, faUser, faBookReader,  faBars, faSort, faSortUp, faSortDown,
-  faEdit, faTrash, faPlus, faSave, faCheck, faExclamationTriangle
-
+  faEdit, faTrash, faPlus, faSave, faCheck, faExclamationTriangle, faChevronLeft, faChevronRight
 } from '@fortawesome/free-solid-svg-icons';
 
 export const FA_ICONS = {
@@ -22,6 +21,8 @@ export const FA_ICONS = {
     faPlus: faPlus,
     faSave: faSave,
     faCheck: faCheck,
-    faExclamationTriangle: faExclamationTriangle
+    faExclamationTriangle: faExclamationTriangle,
+    faChevronLeft: faChevronLeft,
+    faChevronRight: faChevronRight,
   }
 }
