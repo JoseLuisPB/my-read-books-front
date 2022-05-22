@@ -58,4 +58,18 @@ export class PaginationComponent implements OnInit {
     this.pagesArray.some( item => item <= 2) ?  this.displayDotsBefore = false : this.displayDotsBefore = true;
     this.pagesArray.some( item => item >= (this.totalPages -1)) ? this.displayDotsAfter = false : this.displayDotsAfter = true;
   }
+
+  previousPage(){
+    const previousPage = this.currentPage - 1;
+    if (previousPage >= 1){
+      this.createPagesArray(previousPage);
+    }
+  }
+
+  nextPage(){
+    const nextPage = this.currentPage + 1;
+    if (nextPage <= this.totalPages) {
+      this.createPagesArray(nextPage);
+    }
+  }
 }

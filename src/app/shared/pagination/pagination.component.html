@@ -1,5 +1,5 @@
 <div class="d-flex align-items-center my-2" style="column-gap:1rem;">
-  <fa-icon role="button" [icon]="faChevronLeft" (click)="createPagesArray(1)"></fa-icon>
+  <fa-icon role="button" [icon]="faChevronLeft" (click)="previousPage()"></fa-icon>
   <button (click)="createPagesArray(1)" [ngClass]="{'currentPage' : 1 === currentPage}">{{ 1 }}</button>
   <div *ngIf="displayDotsBefore">...</div>
   <div *ngFor="let i of pagesArray">
@@ -7,5 +7,5 @@
   </div>
   <div *ngIf="displayDotsAfter">...</div>
   <button (click)="createPagesArray(totalPages)" [ngClass]="{'currentPage' : totalPages === currentPage}">{{ totalPages }}</button>
-  <fa-icon role="button" [icon]="faChevronRight" (click)="createPagesArray(totalPages)"></fa-icon>
+  <fa-icon role="button" [icon]="faChevronRight" (click)="nextPage()"></fa-icon>
 </div>
