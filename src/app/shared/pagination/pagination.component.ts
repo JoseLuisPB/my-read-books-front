@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MessageService } from 'src/app/services/message.service';
 import { FA_ICONS } from '../fa-icons';
 
 @Component({
@@ -8,68 +9,51 @@ import { FA_ICONS } from '../fa-icons';
 })
 export class PaginationComponent implements OnInit {
 
+  @Input() totalEntries!: number;
+  @Input() take!: number;
+  totalPages = 0;
   faChevronLeft = FA_ICONS.solid.faChevronLeft;
   faChevronRight = FA_ICONS.solid.faChevronRight;
-  @Input() totalPages = 10;
-  numberOfPages = 5;
   currentPage = 1;
   pagesArray: number[] = [];
   displayDotsBefore = false;
   displayDotsAfter = true;
+  @Output() selectedPage = new EventEmitter<number>();
 
-  constructor() { }
+  constructor(
+    private messageService: MessageService
+  ) {
+    this.messageService.updateTotalPages.subscribe(take => {
+      this.take = take;
+      this.updateTotalPages(this.totalEntries);
+    })
+  }
 
   ngOnInit(): void {
-    this.createPagesArray(1);
-  }
-
-  createPagesArray(page: number): void {
-    this.currentPage = page;
-    this.pagesArray = [];
-    let adjustPage = Math.floor(this.numberOfPages / 2) * (-1);
-    for(let i = 0; i < this.numberOfPages; i++){
-      const pageToAdd = this.currentPage + adjustPage;
-      if( pageToAdd < 1 ) {
-        i--;
-      }
-      else if (pageToAdd === 1){
-
-      }
-      else if (pageToAdd === this.totalPages ) {
-
-      }
-      else if (pageToAdd > this.totalPages) {
-        this.pagesArray.unshift(this.pagesArray[0] - 1);
-        if (this.pagesArray[0] === 1){
-          this.pagesArray.splice(0, 1);
-        }
-
-      }
-      else {
-        this.pagesArray.push(pageToAdd);
-      }
-      adjustPage++;
-
-    }
-    this.displayDots();
-  }
-
-  displayDots(): void{
-    this.pagesArray.some( item => item <= 2) ?  this.displayDotsBefore = false : this.displayDotsBefore = true;
-    this.pagesArray.some( item => item >= (this.totalPages -1)) ? this.displayDotsAfter = false : this.displayDotsAfter = true;
+    this.updateTotalPages(this.totalEntries);
   }
 
   previousPage(){
     const previousPage = this.currentPage - 1;
     if (previousPage >= 1){
-      this.createPagesArray(previousPage);
+      this.currentPage = previousPage;
+      this.selectedPage.emit(this.currentPage);
     }
   }
 
   nextPage(){
     const nextPage = this.currentPage + 1;
     if (nextPage <= this.totalPages) {
-      this.createPagesArray(nextPage);
+      this.currentPage = nextPage;
+      this.selectedPage.emit(this.currentPage);
     }
+  }
+
+  updateTotalPages(totalEntries: number): void{
+    if (this.take === 0 ){
+      this.totalPages = 1;
+      return;
+    }
+    this.totalPages = Math.ceil(totalEntries / this.take);
   }
 }

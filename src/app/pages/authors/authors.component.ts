@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { TABLE_HEADER_AUTHORS } from 'src/app/constants/headerData';
@@ -7,6 +7,7 @@ import { ISnackBar } from 'src/app/interfaces/snackBar.interface';
 import { ITableHeader } from 'src/app/interfaces/tableHeader.interface';
 import { Author } from 'src/app/models/author.model';
 import { AuthorService } from 'src/app/services/author.service';
+import { MessageService } from 'src/app/services/message.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { FA_ICONS } from 'src/app/shared/fa-icons';
 
@@ -17,9 +18,13 @@ import { FA_ICONS } from 'src/app/shared/fa-icons';
 })
 export class AuthorsComponent implements OnInit, OnDestroy {
 
+  totalBooks = 0;
   authorsLoaded = false;
   headerData: ITableHeader[] = TABLE_HEADER_AUTHORS;
   authorList: Author[] = [];
+  originalAuthorList: Author[] = [];
+  take = 3;
+  pageSelected = 1;
   subscriptions: Subscription[] = [];
   snackBarOptions: ISnackBar;
   faPlus = FA_ICONS.solid.faPlus;
@@ -27,7 +32,8 @@ export class AuthorsComponent implements OnInit, OnDestroy {
   constructor(
     private authorService: AuthorService,
     private dialog: MatDialog,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private messageService: MessageService
     )
     {
       this.snackBarOptions = {
@@ -51,6 +57,9 @@ export class AuthorsComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.authorService.loadAuthors().subscribe( authors => {
         this.authorList = authors;
+        this.originalAuthorList = authors;
+        this.pageSize(this.take);
+        this.totalBooks = this.originalAuthorList.length;
         this.authorsLoaded = true;
       }, error => {
         console.error(error);
@@ -71,7 +80,7 @@ export class AuthorsComponent implements OnInit, OnDestroy {
           this.authorService.saveAuthor(dialogResp.author).subscribe( serviceResp => {
             this.snackBarOptions.message = 'Author created';
             this.utilsService.displaySnackBar(this.snackBarOptions);
-            this.authorList.push(serviceResp)
+            this.authorList.push(serviceResp);
           }, error => {
             this.utilsService.displaySnackBar(this.snackBarOptions, true);
             console.error(error);
@@ -105,5 +114,25 @@ export class AuthorsComponent implements OnInit, OnDestroy {
         console.error(error);
       })
     );
+  }
+
+  selectedPage(event: number){
+    this.pageSelected = event;
+    this.updateTable();
+  }
+  pageSize(event: number){
+    this.take = event;
+    this.messageService.emitUpdateTotalPages(this.take);
+    if (this.take === 0 ){
+      this.authorList = this.originalAuthorList;
+      return;
+    }
+    this.updateTable();
+  }
+
+  updateTable(): void {
+    const skip = (this.pageSelected - 1) * this.take;
+    const lastEntryPosition = skip + this.take;
+    this.authorList = this.originalAuthorList.slice(skip, lastEntryPosition);
   }
 }
