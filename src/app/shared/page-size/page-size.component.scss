@@ -1,0 +1,19 @@
+.select{
+  margin-left: 1rem;
+  border-radius: 0.2rem;
+  font-size: 1rem;
+  padding: 0.25rem;
+}
+
+.span-text{
+  font-size: 0.95rem;
+}
+
+@media screen and (max-width: 768px){
+  #pageSizeComponent{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+  }
+}
+

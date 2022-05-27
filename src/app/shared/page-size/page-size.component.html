@@ -1,0 +1,6 @@
+<div id="pageSizeComponent" class="d-flex align-items-center">
+  <span class="span-text">Items per page </span>
+  <select class="select" (change)="pageSizeHandler($event)" [formControl]="pageControl">
+    <option role="button" *ngFor="let i of pageSizes" [value]="i.value"> {{ i.text }}</option>
+  </select>
+</div>
