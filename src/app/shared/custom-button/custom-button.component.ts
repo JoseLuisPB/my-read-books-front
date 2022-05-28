@@ -9,7 +9,7 @@ import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 export class CustomButtonComponent implements OnInit {
 
   @Input() icon!: IconDefinition;
-  @Input() buttonClass!: 'edit' | 'delete' | 'new';
+  @Input() buttonClass!: 'edit' | 'delete' | 'new' | 'search';
   @Input() title = '';
   @Input() disableButton = false;
 

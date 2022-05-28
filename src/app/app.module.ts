@@ -26,6 +26,7 @@ import { ConfirmDialogComponent } from './dialog/confirm-dialog/confirm-dialog.c
 import { DeleteDialogComponent } from './dialog/delete-dialog/delete-dialog.component';
 import { PaginationComponent } from './shared/pagination/pagination.component';
 import { PageSizeComponent } from './shared/page-size/page-size.component';
+import { SearchComponent } from './shared/search/search.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { PageSizeComponent } from './shared/page-size/page-size.component';
     DeleteDialogComponent,
     PaginationComponent,
     PageSizeComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,

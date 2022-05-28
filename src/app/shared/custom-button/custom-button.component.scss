@@ -20,6 +20,11 @@
   background-color: $new;
 }
 
+.search{
+  @extend .button-format;
+  background-color: $navbar;
+}
+
 button:disabled{
   background-color: $disabled;
 }

@@ -1,0 +1,31 @@
+.grid-container{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+}
+
+app-search{
+  display:flex;
+  justify-content: end;
+}
+
+#pageHandlers{
+  display: flex;
+  align-items: center;
+}
+
+@media screen and(max-width: 767px){
+  #pageSettings{
+    grid-template-columns: 1fr;
+  }
+
+  #pageHandlers{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    width: 100%;
+  }
+  app-search{
+    justify-content: start;
+  }
+}

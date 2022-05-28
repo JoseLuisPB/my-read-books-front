@@ -135,4 +135,8 @@ export class AuthorsComponent implements OnInit, OnDestroy {
     const lastEntryPosition = skip + this.take;
     this.authorList = this.originalAuthorList.slice(skip, lastEntryPosition);
   }
+
+  searchEvent(word: string): void {
+    this.authorList = this.originalAuthorList.filter( author => author['fullName'].includes(word));
+  }
 }
