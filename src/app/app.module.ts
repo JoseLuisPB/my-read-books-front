@@ -27,6 +27,7 @@ import { DeleteDialogComponent } from './dialog/delete-dialog/delete-dialog.comp
 import { PaginationComponent } from './shared/pagination/pagination.component';
 import { PageSizeComponent } from './shared/page-size/page-size.component';
 import { SearchComponent } from './shared/search/search.component';
+import { PageAndSearchHolderComponent } from './shared/page-and-search-holder/page-and-search-holder.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { SearchComponent } from './shared/search/search.component';
     PaginationComponent,
     PageSizeComponent,
     SearchComponent,
+    PageAndSearchHolderComponent,
   ],
   imports: [
     BrowserModule,
