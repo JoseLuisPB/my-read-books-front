@@ -9,6 +9,7 @@ import { ISnackBar } from 'src/app/interfaces/snackBar.interface';
 import { ITableHeader } from 'src/app/interfaces/tableHeader.interface';
 import { BookDto } from 'src/app/models/bookDto.model';
 import { BooksService } from 'src/app/services/books.service';
+import { MessageService } from 'src/app/services/message.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { FA_ICONS } from 'src/app/shared/fa-icons';
 
@@ -19,8 +20,12 @@ import { FA_ICONS } from 'src/app/shared/fa-icons';
 })
 export class BooksComponent implements OnInit, OnDestroy {
 
+  totalBooks = 0;
+  take = 3;
+  pageSelected = 1;
   headerData: ITableHeader[] = TABLE_HEADER_BOOKS;
-  tableData: BookDto[] = [];
+  bookList: BookDto[] = [];
+  originalBookList: BookDto[] = [];
   subscriptions: Subscription[] = [];
   snackBarOptions: ISnackBar;
   isLoading = true;
@@ -29,7 +34,8 @@ export class BooksComponent implements OnInit, OnDestroy {
   constructor(
     private booksService: BooksService,
     private dialog: MatDialog,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private messageService: MessageService
   ) {
     this.snackBarOptions = {
       message: '',
@@ -48,7 +54,10 @@ export class BooksComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.subscriptions.push(
       this.booksService.loadBooks().subscribe( books => {
-        this.tableData = books;
+        this.bookList = books;
+        this.originalBookList = books;
+        this.pageSize(this.take);
+        this.totalBooks = books.length;
         this.isLoading = false;
       }, error => {
         console.error(error);
@@ -144,5 +153,29 @@ export class BooksComponent implements OnInit, OnDestroy {
         console.error(error);
       })
     );
+  }
+
+  selectedPage(event: number){
+    this.pageSelected = event;
+    this.updateTable();
+  }
+  pageSize(event: number){
+    this.take = event;
+    this.messageService.emitUpdateTotalPages(this.take);
+    if (this.take === 0 ){
+      this.bookList = this.originalBookList;
+      return;
+    }
+    this.updateTable();
+  }
+
+  updateTable(): void {
+    const skip = (this.pageSelected - 1) * this.take;
+    const lastEntryPosition = skip + this.take;
+    this.bookList = this.originalBookList.slice(skip, lastEntryPosition);
+  }
+
+  searchEvent(word: string): void {
+    this.bookList = this.originalBookList.filter( author => author['title'].includes(word));
   }
 }

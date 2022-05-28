@@ -18,7 +18,7 @@ import { FA_ICONS } from 'src/app/shared/fa-icons';
 })
 export class AuthorsComponent implements OnInit, OnDestroy {
 
-  totalBooks = 0;
+  totalAuthors = 0;
   authorsLoaded = false;
   headerData: ITableHeader[] = TABLE_HEADER_AUTHORS;
   authorList: Author[] = [];
@@ -59,7 +59,7 @@ export class AuthorsComponent implements OnInit, OnDestroy {
         this.authorList = authors;
         this.originalAuthorList = authors;
         this.pageSize(this.take);
-        this.totalBooks = this.originalAuthorList.length;
+        this.totalAuthors = this.originalAuthorList.length;
         this.authorsLoaded = true;
       }, error => {
         console.error(error);

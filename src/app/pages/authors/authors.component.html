@@ -3,7 +3,7 @@
     <app-custom-button [buttonClass]="'new'" [icon]="faPlus" (click)="createNewAuthor()"></app-custom-button>
   </div>
   <div *ngIf="authorsLoaded; else spinner;">
-    <app-page-and-search-holder [take]="take" [totalBooks]="totalBooks" (pageSize)="pageSize($event)" (searchEvent)="searchEvent($event)" (selectedPage)="selectedPage($event)"></app-page-and-search-holder>
+    <app-page-and-search-holder [take]="take" [totalBooks]="totalAuthors" (pageSize)="pageSize($event)" (searchEvent)="searchEvent($event)" (selectedPage)="selectedPage($event)"></app-page-and-search-holder>
     <app-custom-table  [headerData]="headerData" [tableData]="authorList" [displayActionColumn]="true" [displayDelete]="false" (editEntry)="updateAuthor($event)"></app-custom-table>
   </div>
   <ng-template #spinner>
