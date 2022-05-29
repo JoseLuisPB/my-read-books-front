@@ -1,9 +1,10 @@
+@import '../../app.component.scss';
 .search{
   border-radius: 0.2rem;
   font-size: 1rem;
 }
 
-@media screen and (max-width: 767px){
+@media screen and (max-width: $mediaTabletBreakPoint){
   .search{
     margin-bottom: 1rem;
     width: 100%;

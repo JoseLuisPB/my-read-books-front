@@ -1,3 +1,4 @@
+/*MARGINS*/
 $marginLeft: 5%;
 $marginTop: 0;
 $marginRight: 5%;
@@ -22,3 +23,6 @@ $marginBottomMobile: 0;
     margin-bottom: $marginBottomMobile;
   }
 }
+
+/**/
+$mediaTabletBreakPoint: 767px;

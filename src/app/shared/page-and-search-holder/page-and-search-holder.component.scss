@@ -1,3 +1,5 @@
+@import '../../app.component.scss';
+
 .grid-container{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -14,7 +16,7 @@ app-search{
   align-items: center;
 }
 
-@media screen and(max-width: 767px){
+@media screen and(max-width: $mediaTabletBreakPoint){
   #pageSettings{
     grid-template-columns: 1fr;
   }

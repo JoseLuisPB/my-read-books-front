@@ -8,18 +8,11 @@ import { FormControl } from '@angular/forms';
 })
 export class PageSizeComponent implements OnInit {
 
-  /* pageSizes = [
-    {value: 10, text: '10'},
-    {value: 50, text: '50'},
-    {value: 100, text: '100'},
-    {value: 0, text: 'All'}
-  ];
- */
   @Input() take!: number;
   pageSizes = [
-    {value: 1, text: '1'},
-    {value: 2, text: '2'},
-    {value: 3, text: '3'},
+    {value: 5, text: '5'},
+    {value: 10, text: '10'},
+    {value: 25, text: '25'},
     {value: 0, text: 'All'}
   ];
 

@@ -1,3 +1,4 @@
+@import '../../app.component.scss';
 .select{
   margin-left: 1rem;
   border-radius: 0.2rem;
@@ -9,7 +10,7 @@
   font-size: 0.95rem;
 }
 
-@media screen and (max-width: 767px){
+@media screen and (max-width: $mediaTabletBreakPoint){
   #pageSizeComponent{
     width: 100%;
     display: flex;
