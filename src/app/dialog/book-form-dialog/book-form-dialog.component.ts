@@ -2,10 +2,12 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { ISnackBar } from 'src/app/interfaces/snackBar.interface';
 import { Author } from 'src/app/models/author.model';
 import { AuthorService } from 'src/app/services/author.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { FA_ICONS } from 'src/app/shared/fa-icons';
+import { AuthorFormDialogComponent } from '../author-form-dialog/author-form-dialog.component';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
@@ -17,25 +19,43 @@ export class BookFormDialogComponent implements OnInit, OnDestroy {
 
   action = '';
   faSave = FA_ICONS.solid.faSave;
+  faUser = FA_ICONS.solid.faUser;
   saveDisabled = true;
   formDataLoaded = false;
   bookForm: FormGroup;
   subscriptions: Subscription[] = []
   authorList: Author[] = [];
+  snackBarOptions: ISnackBar;
 
   constructor(
     private formBuilder: FormBuilder,
     private authorService: AuthorService,
-    private utilService: UtilsService,
+    private utilsService: UtilsService,
     private bookDialogForm: MatDialogRef<BookFormDialogComponent>,
     private confirmDialog: MatDialog,
+    private authorDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) private data: any
   ) {
+    this.snackBarOptions = {
+      message: '',
+      panel: '',
+      horizontalPosition: 'end',
+      verticalPosition: 'top',
+      time: 3000
+    }
     this.action = this.data.action;
     this.bookForm = this.initForm();
   }
 
   ngOnInit(): void {
+    this.loadAuthors();
+  }
+
+  ngOnDestroy(): void {
+      this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
+
+  loadAuthors():void {
     this.subscriptions.push(
       this.authorService.loadAuthors().subscribe( authors =>{
         this.authorList = authors.sort((a: Author, b: Author) => ( a.fullName < b.fullName ? -1 : 1));
@@ -46,11 +66,6 @@ export class BookFormDialogComponent implements OnInit, OnDestroy {
         console.error(error);
       })
     );
-
-  }
-
-  ngOnDestroy(): void {
-      this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
   initForm(): FormGroup {
@@ -95,7 +110,7 @@ export class BookFormDialogComponent implements OnInit, OnDestroy {
 
   saveForm(): void{
     if(! this.bookForm.valid) {
-      this.utilService.markFormGroupTouched(this.bookForm);
+      this.utilsService.markFormGroupTouched(this.bookForm);
       return;
     }
     this.bookDialogForm.close({
@@ -107,5 +122,32 @@ export class BookFormDialogComponent implements OnInit, OnDestroy {
         year: this.bookForm.get('year')?.value,
       }
     });
+  }
+
+  createNewAuthor():void{
+    const createAuthor = this.authorDialog.open(AuthorFormDialogComponent, {
+      data: {author: {id: null}, action:'Create'},
+      disableClose: true,
+      panelClass: 'remove-dialog-padding'
+    });
+    this.subscriptions.push(
+
+    )
+    createAuthor.afterClosed().subscribe(dialogResp => {
+
+      if (dialogResp.save === true) {
+        this.saveDisabled = true;
+        this.formDataLoaded = false;
+        this.authorService.saveAuthor(dialogResp.author).subscribe(serviceResp => {
+          this.snackBarOptions.message = 'Author created';
+          this.utilsService.displaySnackBar(this.snackBarOptions);
+          this.loadAuthors();
+        }, error => {
+          console.error(error);
+          this.saveDisabled = false;
+          this.formDataLoaded = true;
+        })
+      }
+    })
   }
 }

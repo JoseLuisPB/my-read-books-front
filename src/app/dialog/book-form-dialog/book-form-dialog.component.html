@@ -8,19 +8,22 @@
     <app-form-error-text *ngIf="bookForm.controls['title'].invalid && bookForm.controls['title'].touched" [message]="'Please enter the title'">
     </app-form-error-text>
     <mat-form-field>
-      <mat-label>Year</mat-label>
+      <mat-label>Read on</mat-label>
       <input matInput type="number" formControlName="year" />
     </mat-form-field>
     <app-form-error-text *ngIf="bookForm.controls['year'].invalid && bookForm.controls['year'].touched" [message]="'Please enter a year'">
     </app-form-error-text>
-    <mat-form-field>
-      <mat-label>Author</mat-label>
-      <mat-select formControlName="author">
-        <mat-option *ngFor="let author of authorList" [value]="author.id">
-          {{ author.fullName }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div class="d-flex justify-content-between">
+      <mat-form-field class=" w-75">
+        <mat-label>Author</mat-label>
+        <mat-select formControlName="author">
+          <mat-option *ngFor="let author of authorList" [value]="author.id">
+            {{ author.fullName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <app-custom-button [buttonClass]="'new'" [icon]="faUser" [title]="'New author'" (click)="createNewAuthor()"></app-custom-button>
+    </div>
     <app-form-error-text *ngIf="bookForm.controls['author'].invalid && bookForm.controls['author'].touched" [message]="'Please select an author'">
     </app-form-error-text>
   </form>
