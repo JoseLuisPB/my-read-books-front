@@ -3,7 +3,7 @@ import { BooksService } from 'src/app/services/books.service';
 import { Subscription } from 'rxjs';
 import { ITableHeader } from 'src/app/interfaces/tableHeader.interface';
 import { BookDto } from 'src/app/models/bookDto.model';
-import { TABLE_HEADER_BOOKS } from 'src/app/constants/headerData';
+import { TABLE_HEADER_BOOKS } from 'src/app/constants/headerData.constants';
 
 @Component({
   selector: 'app-home',

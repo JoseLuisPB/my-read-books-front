@@ -6,7 +6,7 @@
   </div>
 </section>
 <hr>
-<section *ngIf="!isLoading; else loading">
+<section *ngIf="!isLoading; else loading" class="pb-4">
     <app-custom-table [width]="100" [headerData]="headerData" [tableData]="tableData" [displayActionColumn]="false"></app-custom-table>
 </section>
 <ng-template #loading>

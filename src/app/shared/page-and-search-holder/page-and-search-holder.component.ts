@@ -7,6 +7,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class PageAndSearchHolderComponent implements OnInit {
 
+  @Input() placeHolder!: string;
   @Input() take!:number;
   @Input() totalBooks!: number;
   @Output() pageSize = new EventEmitter<number>();

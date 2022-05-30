@@ -3,7 +3,7 @@
     <app-custom-button [icon]="faPlus" [buttonClass]="'new'" (click)="createNewBook()"></app-custom-button>
   </div>
   <div *ngIf="!isLoading; else load">
-    <app-page-and-search-holder [take]="take" [totalBooks]="totalBooks" (pageSize)="pageSize($event)" (searchEvent)="searchEvent($event)" (selectedPage)="selectedPage($event)"></app-page-and-search-holder>
+    <app-page-and-search-holder [take]="take" [totalBooks]="totalBooks" [placeHolder]="'Search book'" (pageSize)="pageSize($event)" (searchEvent)="searchEvent($event)" (selectedPage)="selectedPage($event)"></app-page-and-search-holder>
     <app-custom-table  [headerData]="headerData" [tableData]="bookList" [displayActionColumn]="true" (editEntry)="updateBook($event)" (deleteEntry)="deleteBook($event)"></app-custom-table>
   </div>
   <ng-template #load>

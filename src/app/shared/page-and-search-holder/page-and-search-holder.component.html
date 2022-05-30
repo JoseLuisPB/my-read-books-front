@@ -3,5 +3,5 @@
     <app-page-size [take]="take" (pageSize)="pageSizeHandler($event)"></app-page-size>
     <app-pagination class="ms-3" [totalEntries]="totalBooks" [take]="take" (selectedPage)="currentPage($event)"></app-pagination>
   </div>
-  <app-search [placeholder]="'Search author'" (searchEvent)="searchWord($event)"></app-search>
+  <app-search [placeholder]="placeHolder" (searchEvent)="searchWord($event)"></app-search>
 </div>
