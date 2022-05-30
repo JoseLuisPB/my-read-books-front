@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { TABLE_HEADER_AUTHORS } from 'src/app/constants/headerData.constants';
-import { TAKE } from 'src/app/constants/myReadBooks.constants';
+import { MY_READ_BOOKS} from 'src/app/constants/myReadBooks.constants';
 import { AuthorFormDialogComponent } from 'src/app/dialog/author-form-dialog/author-form-dialog.component';
 import { ISnackBar } from 'src/app/interfaces/snackBar.interface';
 import { ITableHeader } from 'src/app/interfaces/tableHeader.interface';
@@ -24,7 +24,7 @@ export class AuthorsComponent implements OnInit, OnDestroy {
   headerData: ITableHeader[] = TABLE_HEADER_AUTHORS;
   authorList: Author[] = [];
   originalAuthorList: Author[] = [];
-  take = TAKE;
+  take = MY_READ_BOOKS.take;
   pageSelected = 1;
   subscriptions: Subscription[] = [];
   snackBarOptions: ISnackBar;

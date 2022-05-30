@@ -28,6 +28,7 @@ import { PaginationComponent } from './shared/pagination/pagination.component';
 import { PageSizeComponent } from './shared/page-size/page-size.component';
 import { SearchComponent } from './shared/search/search.component';
 import { PageAndSearchHolderComponent } from './shared/page-and-search-holder/page-and-search-holder.component';
+import { StatisticsComponent } from './pages/statistics/statistics.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { PageAndSearchHolderComponent } from './shared/page-and-search-holder/pa
     PageSizeComponent,
     SearchComponent,
     PageAndSearchHolderComponent,
+    StatisticsComponent,
   ],
   imports: [
     BrowserModule,

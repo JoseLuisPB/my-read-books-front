@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { TABLE_HEADER_BOOKS } from 'src/app/constants/headerData.constants';
-import { TAKE } from 'src/app/constants/myReadBooks.constants';
+import { MY_READ_BOOKS} from 'src/app/constants/myReadBooks.constants';
 import { BookFormDialogComponent } from 'src/app/dialog/book-form-dialog/book-form-dialog.component';
 import { DeleteDialogComponent } from 'src/app/dialog/delete-dialog/delete-dialog.component';
 import { IBook } from 'src/app/interfaces/book.interface';
@@ -22,7 +22,7 @@ import { FA_ICONS } from 'src/app/shared/fa-icons';
 export class BooksComponent implements OnInit, OnDestroy {
 
   totalBooks = 0;
-  take = TAKE;
+  take = MY_READ_BOOKS.take;
   pageSelected = 1;
   headerData: ITableHeader[] = TABLE_HEADER_BOOKS;
   bookList: BookDto[] = [];
@@ -178,5 +178,6 @@ export class BooksComponent implements OnInit, OnDestroy {
 
   searchEvent(word: string): void {
     this.bookList = this.originalBookList.filter( author => author['title'].includes(word));
+    this.take =  0;
   }
 }

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { PAGESIZE } from 'src/app/constants/myReadBooks.constants';
+import { MY_READ_BOOKS} from 'src/app/constants/myReadBooks.constants';
 
 @Component({
   selector: 'app-page-size',
@@ -10,7 +10,7 @@ import { PAGESIZE } from 'src/app/constants/myReadBooks.constants';
 export class PageSizeComponent implements OnInit {
 
   @Input() take!: number;
-  pageSizes = PAGESIZE;
+  pageSizes = MY_READ_BOOKS.pageSize;
 
   pageControl: FormControl;
 
