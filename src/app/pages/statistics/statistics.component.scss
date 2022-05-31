@@ -1,0 +1,21 @@
+@import '../../shared/colors.scss';
+
+.base{
+  font-size: 16px;
+  font-family: arial;
+  opacity: 1 !important;
+}
+
+.mat-tab-label {
+  @extend .base;
+  color: white;
+}
+
+.mat-tab-label.mat-tab-label-active {
+  @extend .base;
+  color: $active;
+}
+
+.mat-ink-bar {
+  background-color: $active;
+}

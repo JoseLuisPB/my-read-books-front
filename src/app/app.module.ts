@@ -19,6 +19,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatTabsModule} from '@angular/material/tabs';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormErrorTextComponent } from './shared/form-error-text/form-error-text.component';
 import { BookFormDialogComponent } from './dialog/book-form-dialog/book-form-dialog.component';
@@ -29,6 +30,7 @@ import { PageSizeComponent } from './shared/page-size/page-size.component';
 import { SearchComponent } from './shared/search/search.component';
 import { PageAndSearchHolderComponent } from './shared/page-and-search-holder/page-and-search-holder.component';
 import { StatisticsComponent } from './pages/statistics/statistics.component';
+import { YearComponent } from './pages/statistics/year/year.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,7 @@ import { StatisticsComponent } from './pages/statistics/statistics.component';
     SearchComponent,
     PageAndSearchHolderComponent,
     StatisticsComponent,
+    YearComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +65,7 @@ import { StatisticsComponent } from './pages/statistics/statistics.component';
     MatInputModule,
     MatSelectModule,
     MatSnackBarModule,
+    MatTabsModule,
     ReactiveFormsModule,
   ],
   providers: [],
