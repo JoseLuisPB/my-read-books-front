@@ -1,1 +1,10 @@
-<p>year works!</p>
+<mat-accordion *ngIf="yearsLoaded">
+  <mat-expansion-panel *ngFor="let year of yearList"  (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header >
+      <mat-panel-title>
+        <span class="panel-title">Year {{ year }}</span>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <p *ngFor="let book of filterYear(year); let i = index">{{i + 1}}.- <span class="panel-content">{{ book.title }}</span> - {{ book.author }}</p>
+  </mat-expansion-panel>
+</mat-accordion>

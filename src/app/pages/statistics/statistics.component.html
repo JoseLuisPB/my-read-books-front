@@ -1,10 +1,14 @@
 <section *ngIf="dataLoaded; else spinner">
   <mat-tab-group [color]="'blue'">
     <mat-tab label="Year">
-      <app-year></app-year>
+      <app-year [data]="booksList"></app-year>
     </mat-tab>
-    <mat-tab label="Author"> Author </mat-tab>
-    <mat-tab label="Country"> Coountry </mat-tab>
+    <mat-tab label="Author">
+      <app-author [data]="booksList"></app-author>
+    </mat-tab>
+    <mat-tab label="Country">
+      <app-country [data]="booksList"></app-country>
+    </mat-tab>
   </mat-tab-group>
 </section>
 <ng-template #spinner>

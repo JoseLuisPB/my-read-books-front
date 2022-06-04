@@ -1,0 +1,10 @@
+<mat-accordion *ngIf="countriesLoaded">
+  <mat-expansion-panel *ngFor="let country of countryList" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header >
+      <mat-panel-title>
+        <span class="panel-title">{{ country }}</span>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <p *ngFor="let author of filterCountry(country); let i = index">{{i + 1}}.- <span class="panel-content">{{ author }}</span></p>
+  </mat-expansion-panel>
+</mat-accordion>

@@ -32,6 +32,8 @@ import { SearchComponent } from './shared/search/search.component';
 import { PageAndSearchHolderComponent } from './shared/page-and-search-holder/page-and-search-holder.component';
 import { StatisticsComponent } from './pages/statistics/statistics.component';
 import { YearComponent } from './pages/statistics/year/year.component';
+import { AuthorComponent } from './pages/statistics/author/author.component';
+import { CountryComponent } from './pages/statistics/country/country.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,8 @@ import { YearComponent } from './pages/statistics/year/year.component';
     PageAndSearchHolderComponent,
     StatisticsComponent,
     YearComponent,
+    AuthorComponent,
+    CountryComponent,
   ],
   imports: [
     BrowserModule,

@@ -35,6 +35,10 @@
   color:white;
 }
 
+.mat-expansion-panel-body{
+  padding: 24px 16px !important;
+}
+
 .mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:hover:not([aria-disabled=true]){
   background-color: $navbar;
 }
