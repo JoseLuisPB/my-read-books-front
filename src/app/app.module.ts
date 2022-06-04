@@ -20,6 +20,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatExpansionModule} from '@angular/material/expansion';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormErrorTextComponent } from './shared/form-error-text/form-error-text.component';
 import { BookFormDialogComponent } from './dialog/book-form-dialog/book-form-dialog.component';
@@ -62,6 +63,7 @@ import { YearComponent } from './pages/statistics/year/year.component';
     FontAwesomeModule,
     HttpClientModule,
     MatDialogModule,
+    MatExpansionModule,
     MatInputModule,
     MatSelectModule,
     MatSnackBarModule,

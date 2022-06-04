@@ -1,5 +1,5 @@
 @import '../../shared/colors.scss';
-
+/* Mat tab group */
 .base{
   font-size: 16px;
   font-family: arial;
@@ -18,4 +18,29 @@
 
 .mat-ink-bar {
   background-color: $active;
+}
+
+/* Mat tab body */
+.mat-tab-body{
+  margin: 1%;
+}
+.mat-expansion-panel{
+  margin-bottom: 1% !important;
+}
+.mat-expansion-panel-header{
+  background-color: $navbar;
+}
+.mat-expansion-panel-header-title,
+.mat-expansion-indicator::after{
+  color:white;
+}
+
+.mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:hover:not([aria-disabled=true]){
+  background-color: $navbar;
+}
+
+.mat-expansion-panel-header.mat-expanded,
+.mat-expansion-panel-header.mat-expanded:focus,
+.mat-expansion-panel-header.mat-expanded:hover{
+  background-color: $active !important;
 }
